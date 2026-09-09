@@ -8,7 +8,6 @@ A C++ chess project.
 - `include/` - public header files
 - `tests/` - unit tests
 - `assets/` - sprites, fonts, and other UI assets
-- `build/` - local build output (ignored by Git)
 - `docs/` - architecture notes and sprint documentation
 
 ## Build
