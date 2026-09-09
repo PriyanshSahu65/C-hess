@@ -6,10 +6,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_library(cpphess_headers INTERFACE)
-target_include_directories(cpphess_headers INTERFACE
+add_executable(cpphess
+    src/main.cpp
+    src/ChessBoard.cpp
+)
+
+target_include_directories(cpphess PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-enable_testing()
-add_subdirectory(tests EXCLUDE_FROM_ALL)
+set_target_properties(cpphess PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/scripts"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/scripts"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/scripts"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_BINARY_DIR}/scripts"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_BINARY_DIR}/scripts"
+)

@@ -13,7 +13,10 @@ A C++ chess project.
 ## Build
 
 ```sh
-cmake -S . -B build
-cmake --build build
-ctest --test-dir build
+cmake -S . -B build -DBUILD_TESTING=OFF
+cmake --build build --config Debug
+build/scripts/cpphess.exe
 ```
+
+The executable is written to `build/scripts/cpphess.exe`. Tests are currently
+disabled while the game code is being developed.
