@@ -19,6 +19,8 @@ public:
     void printBoard();
     bool makeMove(Move m);
     Move parseMove(const std::string &input);
+
+    bool isLegalMove(Move m);
 };
 
 #endif

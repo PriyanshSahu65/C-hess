@@ -53,9 +53,58 @@ Move ChessBoard::parseMove(const std::string &input) {
 }
 
 bool ChessBoard::makeMove(Move m) {
+    if (!isLegalMove(m)) {
+        std::cout << "Illegal move!\n";
+        return false;
+    }
     char piece = board[m.fromY][m.fromX];
     board[m.toY][m.toX] = piece;
     board[m.fromY][m.fromX] = '.';
     whiteTurn = !whiteTurn;
     return true;
+}
+
+bool ChessBoard::isLegalMove(Move m) {
+    char piece = board[m.fromY][m.fromX];
+    if (piece == '.') return false; //NAN
+
+    // Turne based
+    if (whiteTurn && islower(piece)) return false;
+    if (!whiteTurn && isupper(piece)) return false;
+
+    int dx = m.toX - m.fromX;
+    int dy = m.toY - m.fromY;
+
+    switch (tolower(piece)) {
+        case 'p': // pawn
+            if (whiteTurn) {
+                if (dy == 1 && dx == 0 && board[m.toY][m.toX] == '.') return true;
+                if (dy == 1 && abs(dx) == 1 && islower(board[m.toY][m.toX])) return true;
+            } else {
+                if (dy == -1 && dx == 0 && board[m.toY][m.toX] == '.') return true;
+                if (dy == -1 && abs(dx) == 1 && isupper(board[m.toY][m.toX])) return true;
+            }
+            break;
+
+        case 'r': // elephant
+            if (dx == 0 || dy == 0) return true;
+            break;
+
+        case 'n': // horse
+            if ((abs(dx) == 2 && abs(dy) == 1) || (abs(dx) == 1 && abs(dy) == 2)) return true;
+            break;
+
+        case 'b': // bishop
+            if (abs(dx) == abs(dy)) return true;
+            break;
+
+        case 'q': // queen
+            if (abs(dx) == abs(dy) || dx == 0 || dy == 0) return true;
+            break;
+
+        case 'k': // king
+            if (abs(dx) <= 1 && abs(dy) <= 1) return true;
+            break;
+    }
+    return false;
 }
