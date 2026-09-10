@@ -21,6 +21,7 @@ public:
     Move parseMove(const std::string &input);
 
     bool isLegalMove(Move m);
+    bool isPathClear(int fromX, int fromY, int toX, int toY);
 };
 
 #endif

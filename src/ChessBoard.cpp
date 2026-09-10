@@ -64,11 +64,26 @@ bool ChessBoard::makeMove(Move m) {
     return true;
 }
 
+bool ChessBoard::isPathClear(int fromX, int fromY, int toX, int toY) {
+    int dx = (toX - fromX) == 0 ? 0 : (toX - fromX > 0 ? 1 : -1);
+    int dy = (toY - fromY) == 0 ? 0 : (toY - fromY > 0 ? 1 : -1);
+
+    int x = fromX + dx;
+    int y = fromY + dy;
+
+    while (x != toX || y != toY) {
+        if (board[y][x] != '.') return false;
+        x += dx;
+        y += dy;
+    }
+    return true;
+}
+
 bool ChessBoard::isLegalMove(Move m) {
     char piece = board[m.fromY][m.fromX];
-    if (piece == '.') return false; //NAN
+    if (piece == '.') return false;
 
-    // Turne based
+    // Turn-based
     if (whiteTurn && islower(piece)) return false;
     if (!whiteTurn && isupper(piece)) return false;
 
@@ -86,20 +101,26 @@ bool ChessBoard::isLegalMove(Move m) {
             }
             break;
 
-        case 'r': // elephant
-            if (dx == 0 || dy == 0) return true;
+        case 'r': // Elephant
+            if (dx == 0 || dy == 0) {
+                if (isPathClear(m.fromX, m.fromY, m.toX, m.toY)) return true;
+            }
             break;
 
-        case 'n': // horse
+        case 'n': // Horse
             if ((abs(dx) == 2 && abs(dy) == 1) || (abs(dx) == 1 && abs(dy) == 2)) return true;
             break;
 
         case 'b': // bishop
-            if (abs(dx) == abs(dy)) return true;
+            if (abs(dx) == abs(dy)) {
+                if (isPathClear(m.fromX, m.fromY, m.toX, m.toY)) return true;
+            }
             break;
 
         case 'q': // queen
-            if (abs(dx) == abs(dy) || dx == 0 || dy == 0) return true;
+            if (abs(dx) == abs(dy) || dx == 0 || dy == 0) {
+                if (isPathClear(m.fromX, m.fromY, m.toX, m.toY)) return true;
+            }
             break;
 
         case 'k': // king
@@ -108,3 +129,5 @@ bool ChessBoard::isLegalMove(Move m) {
     }
     return false;
 }
+
+
