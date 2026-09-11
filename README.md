@@ -20,7 +20,9 @@ build/scripts/cpphess.exe
 
 ## Working features
 
-- ChessBoard.h - Currently! we have a struct named Move and a class called ChessBoard(Main Class)
-1. The ChessBoard Class contains var for the 8x8 board and an bool value named WhiteTurn (for Turn based mode)
+- ChessBoard.h - Currently! we have a struct named Move and a class called ChessBoard(Main Class):
+1. The ChessBoard Class contains var for the 8x8 board and an bool value named WhiteTurn (for Turn based mode).
 2. 'ChessBoard Constructor' -> calls setupBoard and turns the bool flag WhiteTurn to true.
 3. 'setupBoard()' -> Handels the initial placements of the pieces and setting ASCII board, Capital letters being White and empty seq = '.'
+4. 'PrintBoard' -> a simple loop to print the current Board and using simple Indexing trick to get a.....h and numbers on the left along. 
+5. 
