@@ -18,5 +18,9 @@ cmake --build build --config Debug
 build/scripts/cpphess.exe
 ```
 
-The executable is written to `build/scripts/cpphess.exe`. Tests are currently
-disabled while the game code is being developed.
+## Working features
+
+- ChessBoard.h - Currently! we have a struct named Move and a class called ChessBoard(Main Class)
+1. The ChessBoard Class contains var for the 8x8 board and an bool value named WhiteTurn (for Turn based mode)
+2. 'ChessBoard Constructor' -> calls setupBoard and turns the bool flag WhiteTurn to true.
+3. 'setupBoard()' -> Handels the initial placements of the pieces and setting ASCII board, Capital letters being White and empty seq = '.'
